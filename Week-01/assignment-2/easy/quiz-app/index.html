@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quiz App</title>
+    <style>
+        :root {
+            --bg: #f2f6fd;
+            --card: #ffffff;
+            --text: #16213b;
+            --muted: #52627b;
+            --accent: #2d6ae3;
+            --border: #d5dfef;
+            --ok: #1f8a43;
+            --bad: #c43b3b;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at top right, #dfeafb, var(--bg) 40%);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+            padding: 20px;
+        }
+
+        .app {
+            width: min(900px, 100%);
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 28px;
+            box-shadow: 0 24px 56px rgba(9, 29, 66, 0.12);
+        }
+
+        h1 {
+            margin: 0 0 8px;
+        }
+
+        .intro {
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .question {
+            margin-top: 20px;
+            padding: 16px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: #fbfdff;
+        }
+
+        .question h3 {
+            margin: 0 0 12px;
+            font-size: 1.1rem;
+        }
+
+        .option {
+            display: flex;
+            gap: 10px;
+            padding: 8px;
+            border-radius: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .option:hover {
+            background: #eef4ff;
+        }
+
+        .actions {
+            margin-top: 18px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            background: var(--accent);
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            padding: 10px 16px;
+            cursor: pointer;
+        }
+
+        button.secondary {
+            background: #445370;
+        }
+
+        .result {
+            margin-top: 16px;
+            font-weight: 700;
+        }
+
+        .report {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .report-item {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 0.95rem;
+        }
+
+        .correct {
+            color: var(--ok);
+        }
+
+        .incorrect {
+            color: var(--bad);
+        }
+    </style>
+</head>
+
+<body>
+    <main class="app">
+        <h1>Frontend Quiz</h1>
+        <p class="intro">Answer all questions and submit to see your score.</p>
+
+        <form id="quizForm"></form>
+
+        <div class="actions">
+            <button id="submitBtn" type="button">Submit Quiz</button>
+            <button id="resetBtn" class="secondary" type="button">Reset</button>
+        </div>
+
+        <div id="result" class="result" aria-live="polite"></div>
+        <div id="report" class="report"></div>
+    </main>
+
+    <script type="module">
+        import { quizData } from "./data.js";
+
+        const form = document.getElementById("quizForm");
+        const submitBtn = document.getElementById("submitBtn");
+        const resetBtn = document.getElementById("resetBtn");
+        const resultEl = document.getElementById("result");
+        const reportEl = document.getElementById("report");
+
+        function createQuestionBlock(question, index) {
+            const wrapper = document.createElement("section");
+            wrapper.className = "question";
+
+            const title = document.createElement("h3");
+            title.textContent = `${index + 1}. ${question.question}`;
+            wrapper.appendChild(title);
+
+            ["a", "b", "c", "d"].forEach((key) => {
+                const label = document.createElement("label");
+                label.className = "option";
+
+                const input = document.createElement("input");
+                input.type = "radio";
+                input.name = `question-${index}`;
+                input.value = key;
+
+                const text = document.createElement("span");
+                text.textContent = `${key.toUpperCase()}. ${question[key]}`;
+
+                label.append(input, text);
+                wrapper.appendChild(label);
+            });
+
+            return wrapper;
+        }
+
+        function renderQuiz() {
+            form.innerHTML = "";
+            quizData.forEach((question, index) => {
+                form.appendChild(createQuestionBlock(question, index));
+            });
+            resultEl.textContent = "";
+            reportEl.innerHTML = "";
+        }
+
+        function getAnswer(index) {
+            const selected = form.querySelector(`input[name="question-${index}"]:checked`);
+            return selected ? selected.value : null;
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            reportEl.innerHTML = "";
+
+            quizData.forEach((question, index) => {
+                const picked = getAnswer(index);
+                const ok = picked === question.correct;
+                if (ok) score += 1;
+
+                const item = document.createElement("div");
+                item.className = "report-item";
+                item.innerHTML = `<strong>Q${index + 1}</strong>: ${ok ? "Correct" : "Incorrect"}`;
+
+                const extra = document.createElement("div");
+                extra.className = ok ? "correct" : "incorrect";
+                extra.textContent = ok
+                    ? `You selected the correct option (${question.correct.toUpperCase()}).`
+                    : `Correct answer: ${question.correct.toUpperCase()} (${question[question.correct]}).`;
+
+                item.appendChild(extra);
+                reportEl.appendChild(item);
+            });
+
+            resultEl.textContent = `You scored ${score} / ${quizData.length}`;
+        }
+
+        submitBtn.addEventListener("click", submitQuiz);
+        resetBtn.addEventListener("click", renderQuiz);
+
+        renderQuiz();
+    </script>
+</body>
+
+</html>

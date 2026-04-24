@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form Builder</title>
+    <style>
+        :root {
+            --bg: #f3f6ff;
+            --card: #ffffff;
+            --text: #13203a;
+            --muted: #596681;
+            --accent: #2d68df;
+            --border: #d5dff0;
+            --danger: #c63737;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(130deg, #e7efff, var(--bg));
+            color: var(--text);
+            padding: 24px;
+        }
+
+        .layout {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 360px 1fr;
+            gap: 18px;
+        }
+
+        .panel {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 18px 44px rgba(10, 32, 66, 0.1);
+        }
+
+        h1,
+        h2 {
+            margin: 0;
+        }
+
+        .sub {
+            margin-top: 6px;
+            color: var(--muted);
+        }
+
+        .form {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        label {
+            display: grid;
+            gap: 6px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        input,
+        select,
+        textarea,
+        button {
+            font: inherit;
+        }
+
+        input,
+        select,
+        textarea {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .status {
+            min-height: 24px;
+            color: #2757be;
+            margin-top: 8px;
+            font-weight: 600;
+        }
+
+        .preview-list {
+            margin-top: 16px;
+            display: grid;
+            gap: 10px;
+        }
+
+        .field-item {
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 10px;
+            background: #fbfdff;
+        }
+
+        .field-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .delete {
+            border: 0;
+            background: #fff0f0;
+            color: var(--danger);
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="layout">
+        <section class="panel">
+            <h1>Form Builder</h1>
+            <p class="sub">Add text fields, checkboxes, or radio groups and preview instantly.</p>
+
+            <div class="form">
+                <label>
+                    Field label
+                    <input id="labelInput" type="text" placeholder="Enter label, e.g. Full Name" />
+                </label>
+
+                <label>
+                    Field type
+                    <select id="typeInput">
+                        <option value="text">Text Input</option>
+                        <option value="checkbox">Checkbox</option>
+                        <option value="radio">Radio Group</option>
+                    </select>
+                </label>
+
+                <label>
+                    Options (for radio only, comma separated)
+                    <textarea id="optionsInput" placeholder="Male, Female, Other"></textarea>
+                </label>
+
+                <button id="addFieldBtn" type="button">Add Field</button>
+                <div id="status" class="status" aria-live="polite"></div>
+            </div>
+        </section>
+
+        <section class="panel">
+            <h2>Preview</h2>
+            <p class="sub">Fields are rendered as they will appear to users.</p>
+
+            <form id="previewForm" class="preview-list"></form>
+        </section>
+    </main>
+
+    <script>
+        const labelInput = document.getElementById("labelInput");
+        const typeInput = document.getElementById("typeInput");
+        const optionsInput = document.getElementById("optionsInput");
+        const addFieldBtn = document.getElementById("addFieldBtn");
+        const previewForm = document.getElementById("previewForm");
+        const statusEl = document.getElementById("status");
+
+        const fields = [];
+
+        function setStatus(text) {
+            statusEl.textContent = text;
+        }
+
+        function renderFields() {
+            previewForm.innerHTML = "";
+
+            if (fields.length === 0) {
+                const empty = document.createElement("p");
+                empty.className = "sub";
+                empty.textContent = "No fields added yet.";
+                previewForm.appendChild(empty);
+                return;
+            }
+
+            fields.forEach((field, index) => {
+                const wrapper = document.createElement("div");
+                wrapper.className = "field-item";
+
+                const meta = document.createElement("div");
+                meta.className = "field-meta";
+                meta.innerHTML = `<strong>${field.label}</strong> <span>${field.type}</span>`;
+
+                const remove = document.createElement("button");
+                remove.type = "button";
+                remove.className = "delete";
+                remove.textContent = "Remove";
+                remove.addEventListener("click", () => {
+                    fields.splice(index, 1);
+                    renderFields();
+                });
+
+                meta.appendChild(remove);
+                wrapper.appendChild(meta);
+
+                if (field.type === "text") {
+                    const input = document.createElement("input");
+                    input.type = "text";
+                    input.placeholder = field.label;
+                    input.disabled = true;
+                    wrapper.appendChild(input);
+                }
+
+                if (field.type === "checkbox") {
+                    const label = document.createElement("label");
+                    const check = document.createElement("input");
+                    check.type = "checkbox";
+                    check.disabled = true;
+                    label.append(check, ` ${field.label}`);
+                    wrapper.appendChild(label);
+                }
+
+                if (field.type === "radio") {
+                    field.options.forEach((option, optionIndex) => {
+                        const label = document.createElement("label");
+                        label.style.display = "block";
+                        const radio = document.createElement("input");
+                        radio.type = "radio";
+                        radio.name = `preview-radio-${index}`;
+                        radio.disabled = true;
+                        radio.id = `radio-${index}-${optionIndex}`;
+                        label.append(radio, ` ${option}`);
+                        wrapper.appendChild(label);
+                    });
+                }
+
+                previewForm.appendChild(wrapper);
+            });
+        }
+
+        function addField() {
+            const label = labelInput.value.trim();
+            const type = typeInput.value;
+            const optionsRaw = optionsInput.value.trim();
+
+            if (!label) {
+                setStatus("Field label is required.");
+                return;
+            }
+
+            const field = { label, type };
+
+            if (type === "radio") {
+                const options = optionsRaw
+                    .split(",")
+                    .map((item) => item.trim())
+                    .filter(Boolean);
+
+                if (options.length < 2) {
+                    setStatus("Radio field needs at least two options.");
+                    return;
+                }
+
+                field.options = options;
+            }
+
+            fields.push(field);
+            labelInput.value = "";
+            optionsInput.value = "";
+            setStatus(`${type} field added.`);
+            renderFields();
+        }
+
+        addFieldBtn.addEventListener("click", addField);
+        renderFields();
+    </script>
+</body>
+
+</html>

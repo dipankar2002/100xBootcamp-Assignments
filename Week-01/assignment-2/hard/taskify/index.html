@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Taskify</title>
+    <style>
+        :root {
+            --bg: #f4f7ff;
+            --panel: #ffffff;
+            --text: #172541;
+            --muted: #5a6985;
+            --accent: #2f6ce9;
+            --border: #d4deef;
+            --drop: #e7f0ff;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at 0% 0%, #eef4ff, #dce8fa 40%, #d2e0f8);
+            color: var(--text);
+            min-height: 100vh;
+            padding: 24px;
+        }
+
+        .wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 14px;
+        }
+
+        .composer {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: end;
+            box-shadow: 0 14px 34px rgba(12, 33, 70, 0.1);
+        }
+
+        label {
+            display: grid;
+            gap: 5px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        input,
+        textarea,
+        select,
+        button {
+            font: inherit;
+        }
+
+        input,
+        textarea,
+        select {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            background: #fff;
+        }
+
+        textarea {
+            min-height: 44px;
+            resize: vertical;
+        }
+
+        button {
+            border: 0;
+            border-radius: 10px;
+            padding: 10px 16px;
+            font-weight: 700;
+            cursor: pointer;
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .board {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .column {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 10px;
+            min-height: 350px;
+            display: grid;
+            align-content: start;
+            gap: 10px;
+            transition: background-color 0.2s ease;
+        }
+
+        .column h2 {
+            margin: 4px 4px 8px;
+            font-size: 1.05rem;
+        }
+
+        .column.drop-target {
+            background: var(--drop);
+        }
+
+        .task {
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 10px;
+            background: #fbfdff;
+            cursor: grab;
+        }
+
+        .task h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .task p {
+            margin: 8px 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .delete {
+            border: 0;
+            background: #ffe9e9;
+            color: #b53939;
+            font-weight: 700;
+            border-radius: 8px;
+            padding: 5px 8px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 900px) {
+            .board {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="wrap">
+        <section class="composer">
+            <label>
+                Title
+                <input id="titleInput" type="text" placeholder="Task title" />
+            </label>
+
+            <label>
+                Description
+                <textarea id="descInput" placeholder="Task details"></textarea>
+            </label>
+
+            <label>
+                Category
+                <select id="columnInput">
+                    <option value="todo">To Do</option>
+                    <option value="in-progress">In Progress</option>
+                    <option value="done">Done</option>
+                </select>
+            </label>
+
+            <button id="addTaskBtn" type="button">Add Task</button>
+        </section>
+
+        <section class="board">
+            <div class="column" data-column="todo">
+                <h2>To Do</h2>
+            </div>
+            <div class="column" data-column="in-progress">
+                <h2>In Progress</h2>
+            </div>
+            <div class="column" data-column="done">
+                <h2>Done</h2>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const titleInput = document.getElementById("titleInput");
+        const descInput = document.getElementById("descInput");
+        const columnInput = document.getElementById("columnInput");
+        const addTaskBtn = document.getElementById("addTaskBtn");
+        const columns = Array.from(document.querySelectorAll(".column"));
+
+        let nextId = 1;
+        const tasks = [];
+
+        function createTaskElement(task) {
+            const card = document.createElement("article");
+            card.className = "task";
+            card.draggable = true;
+            card.dataset.id = String(task.id);
+
+            card.innerHTML = `
+                <div class="row">
+                    <h3>${task.title}</h3>
+                    <button type="button" class="delete">Delete</button>
+                </div>
+                <p>${task.description || "No description"}</p>
+            `;
+
+            const deleteBtn = card.querySelector(".delete");
+            deleteBtn.addEventListener("click", () => {
+                const index = tasks.findIndex((item) => item.id === task.id);
+                if (index !== -1) {
+                    tasks.splice(index, 1);
+                    renderTasks();
+                }
+            });
+
+            card.addEventListener("dragstart", (event) => {
+                event.dataTransfer.setData("text/plain", String(task.id));
+            });
+
+            return card;
+        }
+
+        function renderTasks() {
+            columns.forEach((column) => {
+                const heading = column.querySelector("h2");
+                column.innerHTML = "";
+                column.appendChild(heading);
+            });
+
+            tasks.forEach((task) => {
+                const target = document.querySelector(`.column[data-column="${task.column}"]`);
+                if (target) {
+                    target.appendChild(createTaskElement(task));
+                }
+            });
+        }
+
+        function addTask() {
+            const title = titleInput.value.trim();
+            const description = descInput.value.trim();
+            const column = columnInput.value;
+
+            if (!title) {
+                return;
+            }
+
+            tasks.push({ id: nextId++, title, description, column });
+            titleInput.value = "";
+            descInput.value = "";
+            renderTasks();
+        }
+
+        addTaskBtn.addEventListener("click", addTask);
+
+        columns.forEach((column) => {
+            column.addEventListener("dragover", (event) => {
+                event.preventDefault();
+                column.classList.add("drop-target");
+            });
+
+            column.addEventListener("dragleave", () => {
+                column.classList.remove("drop-target");
+            });
+
+            column.addEventListener("drop", (event) => {
+                event.preventDefault();
+                column.classList.remove("drop-target");
+                const id = Number(event.dataTransfer.getData("text/plain"));
+                const task = tasks.find((item) => item.id === id);
+                if (!task) return;
+                task.column = column.dataset.column;
+                renderTasks();
+            });
+        });
+
+        tasks.push(
+            { id: nextId++, title: "Design homepage", description: "Create hero and feature section", column: "todo" },
+            { id: nextId++, title: "Write tests", description: "Add unit tests for helper functions", column: "in-progress" },
+            { id: nextId++, title: "Setup repo", description: "Initialize project structure", column: "done" }
+        );
+
+        renderTasks();
+    </script>
+</body>
+
+</html>
