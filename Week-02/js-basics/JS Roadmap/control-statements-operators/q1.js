@@ -13,6 +13,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    if (input.x > 10) {
+        return "x is greater than 10";
+    }
+    return "x is not greater than 10";
 }
 
 // Example Test Cases:

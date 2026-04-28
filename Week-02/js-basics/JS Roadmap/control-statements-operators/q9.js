@@ -12,6 +12,16 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const num = input.number;
+    let classification = '';
+    
+    if (num > 0) {
+        classification += 'positive ';
+    } else if (num < 0) {
+        classification += 'negative ';
+    } else {
+        classification += 'zero ';
+    }
 }
 
 // Example Test Cases:

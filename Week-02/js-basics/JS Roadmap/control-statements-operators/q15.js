@@ -12,6 +12,21 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { firstNumber, secondNumber } = input;
+
+    const bitwiseAnd = firstNumber & secondNumber;
+    const bitwiseOr = firstNumber | secondNumber;
+    const bitwiseXor = firstNumber ^ secondNumber;
+    const leftShiftFirst = firstNumber << 1;
+    const rightShiftFirst = firstNumber >> 1;
+
+    return {
+        bitwiseAnd,
+        bitwiseOr,
+        bitwiseXor,
+        leftShiftFirst,
+        rightShiftFirst
+    };
 }
 
 // Example Test Cases:

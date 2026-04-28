@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.map(value => typeof value);
 }
 
 // Example Test Cases:

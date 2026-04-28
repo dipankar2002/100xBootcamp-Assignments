@@ -13,6 +13,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    if (input.age >= 18) {
+        return "Eligible to drive";
+    }
+    return "Not eligible to drive";
 }
 
 // Example Test Cases:

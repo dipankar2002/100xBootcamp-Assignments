@@ -13,6 +13,14 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.map(value => {
+        return {
+            value: value,
+            type: typeof value,
+            isArray: Array.isArray(value),
+            isObject: typeof value === 'object' && !Array.isArray(value) && value !== null
+        };
+    });
 }
 
 // Example Test Cases:

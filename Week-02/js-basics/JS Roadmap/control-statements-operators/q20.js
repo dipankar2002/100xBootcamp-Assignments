@@ -13,6 +13,8 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { object, property } = input;
+    return property in object;
 }
 
 // Example Test Cases:

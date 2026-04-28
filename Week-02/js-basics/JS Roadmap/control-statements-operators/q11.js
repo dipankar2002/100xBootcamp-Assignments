@@ -13,6 +13,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        addition: input.firstNumber + input.secondNumber,
+        subtraction: input.firstNumber - input.secondNumber,
+        multiplication: input.firstNumber * input.secondNumber,
+        division: input.firstNumber / input.secondNumber
+    };
 }
 
 // Example Test Cases:

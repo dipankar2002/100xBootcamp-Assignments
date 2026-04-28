@@ -13,6 +13,21 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const totalMarks = input.marks.reduce((sum, mark) => sum + mark, 0);
+    const percentage = totalMarks / input.marks.length;
+
+    if (percentage >= 90) {
+        return "A";
+    } else if (percentage >= 80) {
+        return "B";
+    } else if (percentage >= 70) {
+        return "C";
+    } else if (percentage >= 60) {
+        return "D";
+    } else {
+        return "F";
+    }
+    return "Grade not assigned";
 }
 
 // Example Test Cases:

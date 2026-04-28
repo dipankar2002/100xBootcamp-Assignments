@@ -13,6 +13,21 @@
 
 function solve(input) {
     // TODO: write your logic here
+    let fruitType;
+    switch (input.fruit) {
+        case "apple":
+            fruitType = "This is an apple.";
+            break;
+        case "banana":
+            fruitType = "This is a banana.";
+            break;
+        case "orange":
+            fruitType = "This is an orange.";
+            break;
+        default:
+            fruitType = "Unknown fruit type.";
+    }
+    return fruitType;
 }
 
 // Example Test Cases:

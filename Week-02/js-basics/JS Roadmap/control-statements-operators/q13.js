@@ -13,6 +13,13 @@
 
 function solve(input) {
     // TODO: write your logic here
+    if (input.firstNumber === input.secondNumber) {
+        return "Numbers are equal";
+    } else if (input.firstNumber > input.secondNumber) {
+        return "firstNumber is greater";
+    } else {
+        return "firstNumber is lesser";
+    }
 }
 
 // Example Test Cases:

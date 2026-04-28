@@ -13,6 +13,15 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { age, hasLicense } = input;
+
+    if (age >= 18 && hasLicense) {
+        return "You are eligible to drive.";
+    } else if (age >= 18 && !hasLicense) {
+        return "You need a license to drive.";
+    } else {
+        return "You are not eligible to drive.";
+    }
 }
 
 // Example Test Cases:

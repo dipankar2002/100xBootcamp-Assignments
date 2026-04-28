@@ -12,6 +12,8 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { firstString, secondString } = input;
+    return firstString + secondString;
 }
 
 // Example Test Cases:

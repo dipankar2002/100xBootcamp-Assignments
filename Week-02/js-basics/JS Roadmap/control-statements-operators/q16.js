@@ -13,6 +13,8 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { firstNumber, secondNumber } = input;
+    return firstNumber > secondNumber ? firstNumber : secondNumber;
 }
 
 // Example Test Cases:
