@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Math.round((input.fahrenheit - 32) * 5 / 9);
 }
 
 // Example Test Cases:

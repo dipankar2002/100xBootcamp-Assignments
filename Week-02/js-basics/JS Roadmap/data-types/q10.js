@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return (input.principal * input.rate * input.years) / 100;
 }
 
 // Example Test Cases:

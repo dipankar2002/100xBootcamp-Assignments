@@ -13,6 +13,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        area: input.length * input.breadth,
+        perimeter: 2 * (input.length + input.breadth)
+    };
 }
 
 // Example Test Cases:

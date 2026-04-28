@@ -12,6 +12,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        totalMarks: input.subject1 + input.subject2,
+        percentage: ((input.subject1 + input.subject2) / (2 * input.maxMarksPerSubject)) * 100
+    };
 }
 
 // Example Test Cases:

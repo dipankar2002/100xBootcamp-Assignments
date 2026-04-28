@@ -12,6 +12,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Math.PI * input.radius * input.radius;
 }
 
 // Example Test Cases:

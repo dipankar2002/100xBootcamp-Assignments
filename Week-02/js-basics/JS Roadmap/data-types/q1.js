@@ -12,6 +12,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        meters: input.kilometers * 1000,
+        centimeters: input.kilometers * 100000
+    }
 }
 
 // Example Test Cases:

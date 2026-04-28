@@ -12,6 +12,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    let sum = 0;
+    for(let x of input) 
+        sum += x;
+    return sum / input.length;
 }
 
 // Example Test Cases:

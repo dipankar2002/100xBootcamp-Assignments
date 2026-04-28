@@ -14,6 +14,11 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        amount: input.quantity * input.rate,
+        discountAmount: (input.quantity * input.rate) * 0.10,
+        amountAfterDiscount: (input.quantity * input.rate) - ((input.quantity * input.rate) * 0.10)
+    }
 }
 
 // Example Test Cases:

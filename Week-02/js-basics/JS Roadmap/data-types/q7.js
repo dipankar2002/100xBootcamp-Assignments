@@ -13,6 +13,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        meters: input.kilometers * 1000,
+        feet: input.kilometers * 3280.84,
+        inches: input.kilometers * 39370.1,
+        centimeters: input.kilometers * 100000
+    };
 }
 
 // Example Test Cases:
