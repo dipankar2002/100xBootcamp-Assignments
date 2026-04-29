@@ -13,6 +13,21 @@
 
 function solve(input) {
     // TODO: write your logic here
+    if (input === null || typeof input !== "object") {
+        return input;
+    }
+
+    if (Array.isArray(input)) {
+        return input.map((item) => solve(item));
+    }
+
+    const cloned = {};
+
+    for (const key in input) {
+        cloned[key] = solve(input[key]);
+    }
+
+    return cloned;
 }
 
 // Example Test Cases:

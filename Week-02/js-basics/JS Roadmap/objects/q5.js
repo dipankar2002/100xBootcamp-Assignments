@@ -15,6 +15,24 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { object1, object2, customMerge } = input;
+    const merged = {};
+
+    for (const key in object1) {
+        if (Object.prototype.hasOwnProperty.call(object2, key)) {
+            merged[key] = customMerge(key, object1[key], object2[key]);
+        } else {
+            merged[key] = object1[key];
+        }
+    }
+
+    for (const key in object2) {
+        if (!Object.prototype.hasOwnProperty.call(object1, key)) {
+            merged[key] = object2[key];
+        }
+    }
+
+    return merged;
 }
 
 // Example Test Cases:

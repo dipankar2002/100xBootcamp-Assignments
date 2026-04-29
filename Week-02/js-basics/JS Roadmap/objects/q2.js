@@ -14,6 +14,16 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { first, second } = input;
+    const common = {};
+
+    for (const key in first) {
+        if (Object.prototype.hasOwnProperty.call(second, key) && first[key] === second[key]) {
+            common[key] = first[key];
+        }
+    }
+
+    return common;
 }
 
 // Example Test Cases:
