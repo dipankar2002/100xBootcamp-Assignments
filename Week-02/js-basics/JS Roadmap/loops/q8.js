@@ -13,6 +13,17 @@
 
 function solve(input) {
     // TODO: write your logic here
+    let result = [];
+    for (let i = 0; i < 10; i++) {
+        if (i === 3) {
+            continue;
+        }
+        if (i === 5) {
+            break;
+        }
+        result.push(i);
+    }
+    return result;
 }
 
 // Example Test Cases:

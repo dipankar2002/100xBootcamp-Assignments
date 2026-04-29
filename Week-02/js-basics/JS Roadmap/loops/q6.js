@@ -14,6 +14,22 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const { correctNumber, guesses } = input;
+    let guessIndex = 0;
+    let message = '';
+    
+    do {
+        const currentGuess = guesses[guessIndex];
+        if (currentGuess === correctNumber) {
+            message = `Correct! It took you ${guessIndex + 1} guesses.`;
+            break;
+        } else {
+            message = `Wrong guess: ${currentGuess}. Try again!`;
+        }
+        guessIndex++;
+    } while (guessIndex < guesses.length);
+    
+    return message;
 }
 
 // Example Test Cases:

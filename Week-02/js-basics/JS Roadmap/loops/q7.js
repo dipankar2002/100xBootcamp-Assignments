@@ -12,6 +12,8 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return `Multiplication table for ${input.number}:\n` +
+        Array.from({ length: 10 }, (_, i) => `${input.number} x ${i + 1} = ${input.number * (i + 1)}`).join('\n');
 }
 
 // Example Test Cases:
