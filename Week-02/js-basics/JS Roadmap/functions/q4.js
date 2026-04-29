@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.length * input.width;
 }
 
 // Example Test Cases:

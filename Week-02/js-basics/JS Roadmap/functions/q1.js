@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return `Hello, ${input.name}!`;
 }
 
 // Example Test Cases:

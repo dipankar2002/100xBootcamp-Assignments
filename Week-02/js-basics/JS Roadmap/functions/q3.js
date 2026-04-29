@@ -14,6 +14,13 @@
 
 function solve(input) {
     // TODO: write your logic here
+    if (input.hour < 12) {
+        return "Good morning";
+    } else if (input.hour < 18) {
+        return "Good afternoon";
+    } else {
+        return "Good evening";
+    }
 }
 
 // Example Test Cases:

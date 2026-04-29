@@ -14,6 +14,19 @@
 
 function solve(input) {
     // TODO: write your logic here
+    function f(x) {
+        return x + 2;
+    }
+
+    function g(x) {
+        return 2 * x;
+    }
+
+    function h(x) {
+        return f(g(x));
+    }
+
+    return h(input.x);
 }
 
 // Example Test Cases:

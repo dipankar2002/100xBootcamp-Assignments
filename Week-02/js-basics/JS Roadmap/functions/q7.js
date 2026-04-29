@@ -13,6 +13,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    globalThis.globalScopeValue = "global";
+    const localScopeValue = "local";
+
+    return `Global: ${globalThis.globalScopeValue}, Local: ${localScopeValue}`;
 }
 
 // Example Test Cases:

@@ -13,6 +13,13 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const outerValue = input.outerValue;
+
+    function innerFunction() {
+        return `Inner function says: ${outerValue}`;
+    }
+
+    return innerFunction();
 }
 
 // Example Test Cases:

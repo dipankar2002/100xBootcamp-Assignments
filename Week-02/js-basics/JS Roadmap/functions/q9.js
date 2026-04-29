@@ -12,6 +12,15 @@
 
 function solve(input) {
     // TODO: write your logic here
+    function factorial(number) {
+        if (number <= 1) {
+            return 1;
+        }
+
+        return number * factorial(number - 1);
+    }
+
+    return factorial(input.number);
 }
 
 // Example Test Cases:

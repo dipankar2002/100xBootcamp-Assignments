@@ -13,6 +13,19 @@
 
 function solve(input) {
     // TODO: write your logic here
+    const number = input.number;
+
+    if (number < 2) {
+        return false;
+    }
+
+    for (let divisor = 2; divisor * divisor <= number; divisor += 1) {
+        if (number % divisor === 0) {
+            return false;
+        }
+    }
+
+    return true;
 }
 
 // Example Test Cases:

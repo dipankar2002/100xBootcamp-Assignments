@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.firstNumber + input.secondNumber;
 }
 
 // Example Test Cases:
