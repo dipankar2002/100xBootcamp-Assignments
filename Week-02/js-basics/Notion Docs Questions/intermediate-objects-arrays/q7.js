@@ -15,6 +15,13 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.entries(input.object).reduce((chunks, entry, index) => {
+        if (index % input.size === 0) {
+            chunks.push([]);
+        }
+        chunks[chunks.length - 1].push(entry);
+        return chunks;
+    }, []);
 }
 
 // Example Test Cases:

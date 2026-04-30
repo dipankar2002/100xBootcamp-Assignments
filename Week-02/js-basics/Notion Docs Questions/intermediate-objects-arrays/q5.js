@@ -18,6 +18,13 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((revenue, order) => {
+        if (!revenue[order.category]) {
+            revenue[order.category] = 0;
+        }
+        revenue[order.category] += order.price;
+        return revenue;
+    }, {});
 }
 
 // Example Test Cases:

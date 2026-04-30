@@ -21,6 +21,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.sort((a, b) => {
+        if (a.name === b.name) {
+            return a.age - b.age; // Sort by age if names are the same
+        }
+        return a.name.localeCompare(b.name); // Sort by name
+    });
 }
 
 // Example Test Cases:

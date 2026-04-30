@@ -18,6 +18,11 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((acc, transaction) => {
+        const { user, amount } = transaction;
+        acc[user] = (acc[user] || 0) + amount;
+        return acc;
+    }, {});
 }
 
 // Example Test Cases:

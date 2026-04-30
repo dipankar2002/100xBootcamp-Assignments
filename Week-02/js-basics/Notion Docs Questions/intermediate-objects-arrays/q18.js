@@ -15,6 +15,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.entries(input.object)
+        .sort(([, valueA], [, valueB]) => valueB - valueA)
+        .slice(0, input.n)
+        .map(([key]) => key);
 }
 
 // Example Test Cases:

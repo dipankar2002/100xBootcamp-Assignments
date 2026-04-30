@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return `${input.user.profile.name} ${input.user.profile.age}`;
 }
 
 // Example Test Cases:

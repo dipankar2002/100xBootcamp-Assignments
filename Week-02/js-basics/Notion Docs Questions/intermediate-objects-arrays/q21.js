@@ -15,6 +15,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return { ...input.first, ...input.second };
 }
 
 // Example Test Cases:

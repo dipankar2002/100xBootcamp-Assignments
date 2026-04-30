@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.values(input).reduce((intersection, currentArray) => {
+        return intersection.filter(value => currentArray.includes(value));
+    });
 }
 
 // Example Test Cases:

@@ -14,6 +14,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(
+        Object.entries(input).map(([key, value]) => {
+            const flatten = (arr) => arr.reduce((acc, val) => acc.concat(Array.isArray(val) ? flatten(val) : val), []);
+            return [key, flatten(value)];
+        })
+    );
 }
 
 // Example Test Cases:

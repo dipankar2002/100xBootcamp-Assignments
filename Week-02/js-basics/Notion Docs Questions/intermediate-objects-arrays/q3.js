@@ -14,6 +14,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(Object.entries(input).filter(([_, value]) => Boolean(value)));
 }
 
 // Example Test Cases:

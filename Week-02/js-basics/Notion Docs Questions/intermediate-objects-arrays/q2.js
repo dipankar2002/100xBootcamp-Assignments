@@ -17,6 +17,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((acc, user) => {
+        acc[user.id] = user.name;
+        return acc;
+    }, {});
 }
 
 // Example Test Cases:

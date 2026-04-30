@@ -14,6 +14,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.values(input)
+        .flat()
+        .reduce((countMap, word) => {
+            countMap[word] = (countMap[word] || 0) + 1;
+            return countMap;
+        }, {});
 }
 
 // Example Test Cases:

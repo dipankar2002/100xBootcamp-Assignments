@@ -15,6 +15,27 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return removeKeyFromObject(input.object, input.removeKey);
+
+    function removeKeyFromObject(obj, keyToRemove) {
+        if (obj === null || typeof obj !== "object") {
+            return obj;
+        }
+
+        if (Array.isArray(obj)) {
+            return obj.map((item) => removeKeyFromObject(item, keyToRemove));
+        }
+
+        const result = {};
+
+        for (const key in obj) {
+            if (key !== keyToRemove) {
+                result[key] = removeKeyFromObject(obj[key], keyToRemove);
+            }
+        }
+
+        return result;
+    }
 }
 
 // Example Test Cases:

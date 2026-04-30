@@ -16,6 +16,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.roles[input.checkRole]?.includes(input.action) || false;
 }
 
 // Example Test Cases:

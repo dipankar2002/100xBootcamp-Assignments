@@ -13,6 +13,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.values(input).reduce((longest, current) => {
+        return current.length > longest.length ? current : longest;
+    }, "");
 }
 
 // Example Test Cases:

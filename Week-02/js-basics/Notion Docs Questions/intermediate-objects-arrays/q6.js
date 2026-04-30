@@ -20,6 +20,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.filter((obj, index, self) =>
+        index === self.findIndex((o) => o.id === obj.id)
+    );
 }
 
 // Example Test Cases:

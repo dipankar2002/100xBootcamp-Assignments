@@ -21,6 +21,16 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.keys(input).reduce((result, lang) => {
+        const translations = input[lang];
+        for (const key in translations) {
+            if (!result[key]) {
+                result[key] = {};
+            }
+            result[key][lang] = translations[key];
+        }
+        return result;
+    }, {});
 }
 
 // Example Test Cases:

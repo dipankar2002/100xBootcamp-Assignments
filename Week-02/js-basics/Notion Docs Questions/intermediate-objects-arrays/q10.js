@@ -18,6 +18,14 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((index, item) => {
+        const { id, category } = item;
+        if (!index[category]) {
+            index[category] = [];
+        }
+        index[category].push(id);
+        return index;
+    }, {});
 }
 
 // Example Test Cases:

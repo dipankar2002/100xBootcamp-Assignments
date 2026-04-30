@@ -15,6 +15,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return {
+        missing: input.expected.filter(item => !input.actual.includes(item)),
+        extra: input.actual.filter(item => !input.expected.includes(item))
+    };
 }
 
 // Example Test Cases:
