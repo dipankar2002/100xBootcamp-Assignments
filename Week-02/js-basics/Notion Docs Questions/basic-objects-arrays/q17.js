@@ -14,6 +14,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.keys(input.first).filter(key => key in input.second);
 }
 
 // Example Test Cases:

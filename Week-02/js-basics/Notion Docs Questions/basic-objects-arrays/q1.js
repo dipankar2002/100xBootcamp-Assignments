@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(
+        Object.entries(input).map(([key, values]) => [key, values.reduce((sum, value) => sum + value, 0)])
+    );
 }
 
 // Example Test Cases:

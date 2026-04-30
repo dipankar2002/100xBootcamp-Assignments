@@ -18,6 +18,16 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((acc, person) => {
+        const { name, city } = person;
+
+        if (!acc[city]) {
+            acc[city] = [];
+        }
+
+        acc[city].push(name);
+        return acc;
+    }, {});
 }
 
 // Example Test Cases:

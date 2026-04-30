@@ -14,6 +14,14 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(
+        Object.entries(input).map(([key, value]) => {
+            if (typeof value === "string") {
+                return [key, value.charAt(0).toUpperCase() + value.slice(1)];
+            }
+            return [key, value];
+        })
+    );
 }
 
 // Example Test Cases:

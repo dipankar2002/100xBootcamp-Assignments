@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.keys(input).reduce((largestKey, currentKey) => {
+        return input[currentKey] > input[largestKey] ? currentKey : largestKey;
+    }, Object.keys(input)[0]);
 }
 
 // Example Test Cases:

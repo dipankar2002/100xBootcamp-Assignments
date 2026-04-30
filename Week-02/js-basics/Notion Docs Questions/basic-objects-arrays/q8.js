@@ -14,6 +14,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.keys(input).reduce((highest, student) => {
+        const average = input[student].reduce((sum, mark) => sum + mark, 0) / input[student].length;
+        const highestAverage = input[highest].reduce((sum, mark) => sum + mark, 0) / input[highest].length;
+
+        return average > highestAverage ? student : highest;
+    });
 }
 
 // Example Test Cases:

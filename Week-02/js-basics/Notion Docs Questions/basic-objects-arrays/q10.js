@@ -15,6 +15,12 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.keys.reduce((result, key) => {
+        if (key in input.object) {
+            result[key] = input.object[key];
+        }
+        return result;
+    }, {});
 }
 
 // Example Test Cases:

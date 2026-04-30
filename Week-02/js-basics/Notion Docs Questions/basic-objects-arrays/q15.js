@@ -13,6 +13,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.entries(input)
+        .map(([key, value]) => `${encodeURIComponent(key)}=${encodeURIComponent(value)}`)
+        .join("&");
 }
 
 // Example Test Cases:

@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.values(input)
+        .flat()
+        .filter((value, index, self) => self.indexOf(value) === index);
 }
 
 // Example Test Cases:

@@ -14,6 +14,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((acc, word) => {
+        acc[word] = (acc[word] || 0) + 1;
+        return acc;
+    }, {});
 }
 
 // Example Test Cases:

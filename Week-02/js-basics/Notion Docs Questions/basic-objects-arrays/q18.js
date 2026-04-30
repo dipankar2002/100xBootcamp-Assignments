@@ -14,6 +14,10 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((lookup, item) => {
+        lookup[item.id] = item;
+        return lookup;
+    }, {});
 }
 
 // Example Test Cases:

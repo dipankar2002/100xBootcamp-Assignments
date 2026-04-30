@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(
+        Object.entries(input).filter(([key, value]) => value > 50)
+    );
 }
 
 // Example Test Cases:

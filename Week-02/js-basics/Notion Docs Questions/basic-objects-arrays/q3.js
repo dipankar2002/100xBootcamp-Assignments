@@ -14,6 +14,9 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.fromEntries(
+        Object.entries(input).map(([key, value]) => [value, key])
+    );
 }
 
 // Example Test Cases:

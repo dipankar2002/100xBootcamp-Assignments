@@ -14,6 +14,14 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return input.reduce((counts, number) => {
+        if (number % 2 === 0) {
+            counts.even += 1;
+        } else {
+            counts.odd += 1;
+        }
+        return counts;
+    }, { even: 0, odd: 0 });
 }
 
 // Example Test Cases:

@@ -14,6 +14,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.entries(input).sort(([, valueA], [, valueB]) => valueA - valueB);
 }
 
 // Example Test Cases:

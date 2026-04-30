@@ -14,6 +14,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.values(input).flat();
 }
 
 // Example Test Cases:

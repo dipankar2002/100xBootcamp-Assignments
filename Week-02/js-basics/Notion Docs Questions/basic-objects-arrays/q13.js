@@ -13,6 +13,7 @@
 
 function solve(input) {
     // TODO: write your logic here
+    return Object.keys(input).length;
 }
 
 // Example Test Cases:
