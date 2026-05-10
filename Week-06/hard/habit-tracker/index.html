@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Habit Tracker Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg-shape bg-shape-one" aria-hidden="true"></div>
+  <div class="bg-shape bg-shape-two" aria-hidden="true"></div>
+
+  <main class="app">
+    <header class="app-header">
+      <div>
+        <p class="eyebrow">Daily System</p>
+        <h1>Habit Tracker</h1>
+      </div>
+      <button id="resetButton" class="ghost-btn" type="button">Reset Sample Data</button>
+    </header>
+
+    <section class="creator" aria-label="Add new habit">
+      <label>
+        Habit
+        <input id="habitInput" type="text" placeholder="Ex: Morning stretch" maxlength="80" />
+      </label>
+      <label>
+        Category
+        <select id="categorySelect">
+          <option value="Morning">Morning</option>
+          <option value="Work">Work</option>
+          <option value="Evening">Evening</option>
+        </select>
+      </label>
+      <button id="addHabitButton" class="primary-btn" type="button">Add Habit</button>
+    </section>
+
+    <section class="board" aria-label="Habit board">
+      <article class="column" data-status="todo">
+        <header>
+          <h2>To Do</h2>
+          <span id="todoCount" class="count">0</span>
+        </header>
+        <div class="drop-zone" id="todoZone" data-status="todo" aria-label="To do habits"></div>
+      </article>
+
+      <article class="column" data-status="inprogress">
+        <header>
+          <h2>In Progress</h2>
+          <span id="inprogressCount" class="count">0</span>
+        </header>
+        <div class="drop-zone" id="inprogressZone" data-status="inprogress" aria-label="In progress habits"></div>
+      </article>
+
+      <article class="column" data-status="done">
+        <header>
+          <h2>Done</h2>
+          <span id="doneCount" class="count">0</span>
+        </header>
+        <div class="drop-zone" id="doneZone" data-status="done" aria-label="Done habits"></div>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
