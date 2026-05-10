@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crypto Tracker Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-background" aria-hidden="true"></div>
+
+  <main class="dashboard">
+    <header class="dashboard-header">
+      <div>
+        <p class="eyebrow">Live Crypto Analytics</p>
+        <h1>Crypto Tracker</h1>
+      </div>
+      <button id="refreshButton" class="refresh-btn" type="button">Refresh Data</button>
+    </header>
+
+    <section class="controls" aria-label="Filters and currency selector">
+      <label class="search-box" for="searchInput">
+        <span class="search-label">Search</span>
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="Type coin name or symbol..."
+          autocomplete="off"
+        />
+      </label>
+
+      <div class="currency-switch" role="group" aria-label="Currency switcher">
+        <button class="currency-btn is-active" data-currency="usd" type="button">USD</button>
+        <button class="currency-btn" data-currency="eur" type="button">EUR</button>
+        <button class="currency-btn" data-currency="inr" type="button">INR</button>
+      </div>
+    </section>
+
+    <section class="summary" aria-live="polite">
+      <p id="resultMeta">Loading live market data...</p>
+    </section>
+
+    <section class="content">
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <div class="table-wrap" id="tableWrap" hidden>
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Coin</th>
+              <th>Price</th>
+              <th>24h Change</th>
+              <th>Market Cap</th>
+              <th>Volume</th>
+            </tr>
+          </thead>
+          <tbody id="cryptoTableBody"></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
