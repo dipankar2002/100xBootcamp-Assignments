@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume Section Builder</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="grain" aria-hidden="true"></div>
+  <main class="layout">
+    <section class="editor-panel" aria-label="Resume section editor">
+      <header>
+        <p class="eyebrow">Resume Composer</p>
+        <h1>Resume Section Builder</h1>
+      </header>
+
+      <form id="sectionForm" class="section-form">
+        <label>
+          Section Type
+          <select id="sectionType" required>
+            <option value="Education">Education</option>
+            <option value="Skills">Skills</option>
+            <option value="Projects">Projects</option>
+            <option value="Experience">Experience</option>
+            <option value="Certifications">Certifications</option>
+            <option value="Custom">Custom</option>
+          </select>
+        </label>
+
+        <label>
+          Section Heading
+          <input id="sectionTitle" type="text" maxlength="80" placeholder="Ex: Selected Projects" required />
+        </label>
+
+        <label>
+          Section Content
+          <textarea id="sectionContent" rows="5" placeholder="Use separate lines for bullet points." required></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button id="submitButton" type="submit" class="primary-btn">Add Section</button>
+          <button id="cancelEditButton" type="button" class="ghost-btn" hidden>Cancel Edit</button>
+        </div>
+      </form>
+
+      <section class="manager" aria-label="Section manager">
+        <div class="manager-head">
+          <h2>Manage Sections</h2>
+          <p id="sectionCount">0 sections</p>
+        </div>
+        <p class="hint">Drag cards to reorder your resume flow.</p>
+        <div id="sectionList" class="section-list"></div>
+      </section>
+    </section>
+
+    <section class="preview-panel" aria-label="Live resume preview">
+      <header class="preview-head">
+        <h2>Live Preview</h2>
+        <p id="previewMeta">Your arranged sections appear here instantly.</p>
+      </header>
+
+      <article class="resume-sheet" id="resumePreview"></article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
